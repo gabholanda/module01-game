@@ -108,21 +108,21 @@ class Wizard extends Player {
       this.isWalking = true;
       switch (e.keyCode) {
         case 37: // Left
-          player.x -= 5;
+          player.x -= Math.floor(this.agility / 10);
           this.direction = false;
           player.update();
           break;
         case 38: // Up
-          player.y -= 5
+          player.y -= Math.floor(this.agility / 10);
           player.update();
           break;
         case 39: // Right
-          player.x += 15;
+          player.x += Math.floor(this.agility / 10);
           this.direction = true;
           player.update();
           break;
         case 40: // Down
-          player.y += 5;
+          player.y += Math.floor(this.agility / 10);
           player.update();
           break;
         default:
@@ -186,7 +186,7 @@ class Wizard extends Player {
           this.attackIndex * 259 / 7,
           0,
           37, 25,
-          this.x - 26, this.y -4,
+          this.x - 26, this.y - 4,
           37 * this.scale, 25 * this.scale);
 
         //Wizard Attack Anm
@@ -225,7 +225,7 @@ class Wizard extends Player {
           this.attackIndex * 259 / 7,
           0,
           37, 25,
-          this.x - 26, this.y -4,
+          this.x - 26, this.y - 4,
           37 * this.scale, 25 * this.scale);
 
         //Wizard Attack Anm R
@@ -241,7 +241,7 @@ class Wizard extends Player {
           this.attackIndex * 259 / 7,
           25,
           37, 25,
-          this.x - 26, this.y -4,
+          this.x - 26, this.y - 4,
           37 * this.scale, 25 * this.scale);
 
         //Wizard Attack ANM L
