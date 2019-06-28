@@ -3,7 +3,7 @@
 #
 # Game Controls:
 # Press the arrow keys to move and Enter to pause game
-# Press the Z and X keys do attack ( X normaly drains mana and Summoner only has Z attack )
+# Press the Z and X keys do attack ( X normally drains mana and Summoner only has Z attack )
 #
 # Attributes:
 # HP stands for Health Points
