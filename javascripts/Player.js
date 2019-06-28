@@ -1,17 +1,16 @@
 class Player {
-  constructor(job, health, mana, strength, agility, intelligence, width, height) {
+  constructor(job, health, mana, strength, agility, intelligence) {
     this.job = job;
     this.health = health;
+    this.maxHealth = health;
     this.mana = mana;
+    this.maxMana = mana;
     this.strength = strength;
     this.agility = agility;
     this.intelligence = intelligence;
-    this.skill = [];
-    this.width = width;
-    this.height = height;
-    this.x = 500;
-    this.y = 250;
-    this.delay = 150;
+    this.needExp = 100;
+    this.receivedExp = 0;
+    this.level = 0;
   }
   attack() {
     if (this.job === 'Warrior')
@@ -23,66 +22,73 @@ class Player {
     else if (this.job === 'Summoner')
       return this.intelligence * 2;
   }
-  skillSet() {
-    if (this.job === 'Wizard')
-      this.skill = ['Fire Explosion', 'Ice Wave'];
-    else if (this.job === 'Warrior')
-      this.skill = ['Sword Energy']
-  }
   receiveDamage(damage) {
-    let context = canvas.context;
     this.health -= damage;
-    context.font = '15px Arial'
-    context.fillText(`-${damage}`, this.x, this.y - 10)
-    console.log(this.health);
+    canvas.context.fillText(`-${damage}`, this.x, this.y - 10)
   }
-  updatePlayer() {
-    playerImg.src = './players/Warrior/Move_Set/Warrior_walking_frame1.png'
-    let context = canvas.context;
-    context.drawImage(playerImg, this.x, this.y, 30, 45)
-  }
-  move(e) {
-
-    if (player.x <= 50) {
-      player.x = 55;
-    } else if (player.x >= 950) {
-      player.x = 945;
-    } else if (player.y <= 50) {
-      player.y = 55;
-    } else if (player.y >= 450) {
-      player.y = 445;
-    } else {
-      switch (e.keyCode) {
-        case 37: // Left
-          player.x -= 5
-          break;
-        case 38: // Up
-          player.y -= 5
-          break;
-        case 39: // Right
-          let context = canvas.context;
-          playerImg.src = `./players/Warrior/Move_Set/warrior_12x17.png`;
-          player.x += 5;
-          context.drawImage(playerImg, 0, 0, 12, 17, this.x, this.y, 30, 45);
-          break;
-        case 40: // Down
-          player.y += 5;
-          break;
-        default:
-          break;
-      }
+  receiveExp(monster) {
+    this.receivedExp = monster.exp;
+    if (this.receivedExp >= this.needExp) {
+      this.receivedExp = 0;
+      this.needExp = Math.ceil(this.needExp * 1.5);
+      this.levelUp();
     }
   }
-  drawFrame(frameX, frameY, canvasX, canvasY) {
-    ctx.drawImage(img,
-                  frameX * width, frameY * height, width, height,
-                  canvasX, canvasY, scaledWidth, scaledHeight);
+  levelUp() {
+    this.level += 1;
+    if (this.job === 'Warrior') {
+      this.maxHealth = Math.ceil(this.maxHealth * 1.1);
+      this.health = this.maxHealth;
+      this.mana = this.maxMana;
+      this.strength = Math.ceil(this.strength * 1.3);
+      this.agility = Math.ceil(1.05 * this.agility);
+    } else if (this.job === 'Wizard') {
+      this.maxHealth = Math.ceil(this.maxHealth * 1.1);
+      this.health = this.maxHealth;
+      this.maxMana = Math.ceil(this.maxMana * 1.2);
+      this.mana = this.maxMana;
+      this.intelligence = Math.ceil(this.intelligence * 1.2);
+      this.agility = Math.ceil(1.05 * this.agility);
+    } else if (this.job === 'Summoner') {
+      this.maxHealth = Math.ceil(this.maxHealth * 1.1);
+      this.health = this.maxHealth;
+      this.mana = this.maxMana;
+      this.intelligence = Math.ceil(this.intelligence * 1.3);
+      this.agility = Math.ceil(1.05 * this.agility);
+    } else {
+      this.maxHealth = Math.ceil(this.maxHealth * 1.1);
+      this.health = this.maxHealth;
+      this.maxMana = Math.ceil(this.maxMana * 1.1);
+      this.mana = this.maxMana;
+      this.strength = Math.ceil(this.strength * 1.2);
+      this.agility = Math.ceil(1.10 * this.agility);
+    }
   }
-  
-  init() {
-    drawFrame(0, 0, 0, 0);
-    drawFrame(1, 0, scaledWidth, 0);
-    drawFrame(0, 0, scaledWidth * 2, 0);
-    drawFrame(2, 0, scaledWidth * 3, 0);
+  playerKeyBinds(e) {
+    if (e.keyCode === 90 || e.keyCode === 88) {
+      player.attack(e);
+    } else {
+      player.move(e);
+    }
+  }
+  interface() {
+    canvas.context.fillStyle = 'rgb(74, 59, 65)';
+    canvas.context.fillRect(1000, 0, 200, 500);
+    canvas.context.font = '18px upheavtt'
+    canvas.context.fillStyle = 'rgb(216, 230, 229)';
+    canvas.context.fillText(`WAVE: ${wave}`, 1050, 50);
+    canvas.context.fillStyle = 'rgb(44, 65, 230)';
+    canvas.context.fillText(`MANA:`, 1010, 180);
+    canvas.context.fillText(`${this.mana} / ${this.maxMana}`, 1050, 200);
+    canvas.context.fillStyle = 'rgb(222, 97, 20)';
+    canvas.context.fillText(`STR: ${this.strength}`, 1010, 300);
+    canvas.context.fillStyle = 'rgb(151, 199, 40)';
+    canvas.context.fillText(`AGI: ${this.agility}`, 1010, 320);
+    canvas.context.fillStyle = 'rgb(187, 28, 199)';
+    canvas.context.fillText(`INT: ${this.intelligence}`, 1010, 340);
+    canvas.context.fillStyle = 'rgb(199, 45, 18)';
+    canvas.context.fillText(`HEALTH:`, 1010, 140)
+    canvas.context.fillText(`${this.health} / ${this.maxHealth}`, 1050, 160)
   }
 }
+

@@ -1,0 +1,11 @@
+@font-face {
+  font-family: 'upheavtt';
+  src: url('../fonts/upheavtt.ttf');
+}
+body {
+  font-family: 'upheavtt';
+  src: url('../fonts/upheavtt.ttf');
+}
+a {
+  text-decoration: none;
+}
