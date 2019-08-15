@@ -44,7 +44,7 @@ class Archer extends Player {
     // ======== SHOOT ARROW  ==================
     if (this.skill) {
       arrows.push(new Arrow(this.x, this.y + 10,
-        Math.ceil(this.strength * 0.3 + this.agility * 0.4),
+        Math.ceil(this.strength * 0.4 + this.agility * 0.7),
         Math.ceil(this.agility / 8), this.direction))
     }
     // ================= ARROW SHOWER HITBOX =========================
@@ -55,7 +55,7 @@ class Archer extends Player {
             && player.x + 250 >= monster.x
             && player.y - 36 <= monster.y
             && player.y + 36 >= monster.y
-            ? monster.receiveDamage(Math.ceil(this.strength * 0.1 + this.agility * 0.2))
+            ? monster.receiveDamage(Math.ceil(this.strength * 0.3 + this.agility * 0.4))
             : false;
         })
       } else {
@@ -64,7 +64,7 @@ class Archer extends Player {
             && player.x - 280 <= monster.x
             && player.y - 36 <= monster.y
             && player.y + 36 >= monster.y
-            ? monster.receiveDamage(Math.ceil(this.strength * 0.1 + this.agility * 0.2))
+            ? monster.receiveDamage(Math.ceil(this.strength * 0.3 + this.agility * 0.4))
             : false;
         })
       }
