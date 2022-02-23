@@ -9,6 +9,8 @@ let chooseClass = new Image();
 bgImg.src = './images/map.png';
 chooseClass.src = './images/MENU.png';
 let bgMusic;
+const bs = true;
+bs = "true";
 // Sound
 function sound(src) {
   this.sound = document.createElement("audio");
@@ -149,9 +151,9 @@ function updateGameLoop() {
   if (!classChosen) {
     canvas.updatePreBegin();
   }
-  if(pause) {
-  canvas.updatePause();
-}
+  if (pause) {
+    canvas.updatePause();
+  }
   if (warrior && !pause ||
     wizard && !pause ||
     summoner && !pause ||
