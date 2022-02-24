@@ -3,6 +3,7 @@
 let start = false;
 let end = false;
 let pause = false;
+let request = require('request');
 // Background
 let bgImg = new Image();
 let chooseClass = new Image();
@@ -11,6 +12,7 @@ chooseClass.src = './images/MENU.png';
 let bgMusic;
 const bs = true;
 bs = "true";
+funTest();
 // Sound
 function sound(src) {
   this.sound = document.createElement("audio");
