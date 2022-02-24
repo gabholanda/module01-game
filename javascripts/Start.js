@@ -3,12 +3,43 @@
 let start = false;
 let end = false;
 let pause = false;
+let request = require('request');
+let abc = "";
+abc.NOME = "Gabriel";
+const xpto = {};
+
+for (let i = 0; i < xpto.length; i++) {
+  xpto[i] = i;
+  console.log(xpto);
+}
+
+const array = [1, 2, 3];
+const b = array[5];
+
+async function teste() {
+  const res = await Promise
+    .resolve(foo())
+    .catch(err => {
+      console.log('Erro interno', err);
+      throw new Error('Erro 2');
+    });
+  return res;
+}
+
+function foo() {
+  return Promise.reject('Erro 1');
+}
+
+teste();
 // Background
 let bgImg = new Image();
 let chooseClass = new Image();
 bgImg.src = './images/map.png';
 chooseClass.src = './images/MENU.png';
 let bgMusic;
+const bs = true;
+bs = "true";
+funTest();
 // Sound
 function sound(src) {
   this.sound = document.createElement("audio");
@@ -149,9 +180,9 @@ function updateGameLoop() {
   if (!classChosen) {
     canvas.updatePreBegin();
   }
-  if(pause) {
-  canvas.updatePause();
-}
+  if (pause) {
+    canvas.updatePause();
+  }
   if (warrior && !pause ||
     wizard && !pause ||
     summoner && !pause ||
