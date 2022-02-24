@@ -16,7 +16,7 @@ for (let i = 0; i < xpto.length; i++) {
 const array = [1, 2, 3];
 const b = array[5];
 
-function teste() {
+async function teste() {
   const res = await Promise
     .resolve(foo())
     .catch(err => {
