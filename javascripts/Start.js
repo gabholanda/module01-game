@@ -4,6 +4,33 @@ let start = false;
 let end = false;
 let pause = false;
 let request = require('request');
+let abc = "";
+abc.NOME = "Gabriel";
+const xpto = {};
+
+for (let i = 0; i < xpto.length; i++) {
+  xpto[i] = i;
+  console.log(xpto);
+}
+
+const array = [1, 2, 3];
+const b = array[5];
+
+function teste() {
+  const res = await Promise
+    .resolve(foo())
+    .catch(err => {
+      console.log('Erro interno', err);
+      throw new Error('Erro 2');
+    });
+  return res;
+}
+
+function foo() {
+  return Promise.reject('Erro 1');
+}
+
+teste();
 // Background
 let bgImg = new Image();
 let chooseClass = new Image();
